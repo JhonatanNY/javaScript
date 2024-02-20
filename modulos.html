@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Modulos en JavaScript</h1>
+    <!--Modulo-->
+    <!--En el contexto de JavaScript, un "módulo" se refiere a un archivo de código JavaScript independiente que encapsula funcionalidades específicas y proporciona una interfaz para interactuar con ellas
+    Un módulo en JavaScript puede contener variables, funciones, clases u otros elementos de código, y puede exportar (hacer públicas) ciertas partes de su funcionalidad para que otros módulos puedan importarlas y utilizarlas.
+    La sintaxis de los módulos en JavaScript ES6 se realiza mediante las palabras clave import y export.-->
+    <!--El atributo type="module" indica que el archivo JavaScript es un módulo. Los navegadores modernos reconocerán esto y tratarán el archivo como un módulo, lo que permite el uso de las características de los módulos de JavaScript.
+        Este enfoque es útil para cargar archivos JavaScript que utilizan la sintaxis de módulos de ES6. -->
+    <script src="js/modulos.js" type="module"></script>
+    <!--El atributo nomodule es una solución de respaldo para navegadores que no admiten módulos de JavaScript. Cuando el navegador encuentra este atributo, ignora el contenido del script si el navegador admite módulos, y ejecuta el script solo si el navegador no admite módulos. -->
+    <script src="js/no-modulos.js" nomodule=""></script>
+</body>
+</html>

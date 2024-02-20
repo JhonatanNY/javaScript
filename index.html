@@ -1,0 +1,1229 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1>Fundamento JavaScript</h1>
+
+
+    <script>
+        /******************************Gramatica JavaScript***********************************/
+        //Cuando son archivos se usa SNAKE CASE
+        //Cuando son constantes se usa UPPER CASE
+        //Cuando son clases se usa UPPER CAMEL CASE
+        //Cuando son objeto, variable, etc se usa LOWER CAMEL CASE
+
+        // Para hacer comentario de una linea
+        /* Para hacer comentarios de
+        varias lineas*/
+
+        /******************************Variables***********************************/
+
+        /*Es mala practica usar var, por el alcance que esta tiene*/
+        /*Si creas un variable con var se va a quedar guardada en el objeto windows*/
+        var hola = "Hola Mundo"    /* Las variables declaradas con var son "elevadas" al principio de su ámbito por lo que no respeta el block scope*/
+        /*Si creas un variable con let no se va a quedar guardada en el objeto windows*/
+        let hello = "Hello World"  /* Las variables declaradas con let tienen un alcance de bloque (block scope). Esto significa que están disponibles solo dentro del bloque en el que fueron declaradas,*/
+        console.log(hola);
+        console.log(hello);
+        console.log(window)
+        console.log(window.hola)  /*El objeto window representa la ventana del navegador que contiene el documento HTML. Contiene propiedades y métodos relacionados con la ventana del navegador*/
+        console.log(window.hello)
+
+        //Ambito de bloque
+        if (true) {
+            let a = 3;
+            console.log(a)
+        }
+
+        /*Ejercicio viendo el Scope(alcance) declarando con var y let y como se muestra en consola */
+
+        var musica = "Rock";
+        console.log("Variable Musica antes del Bloque: ", musica)
+
+        {
+            var musica = "Pop"
+            console.log("Variable Musica dentro del Bloque: ", musica)
+        }
+
+        console.log("Variable Musica despues del Bloque: ", musica)
+        //NOTA : Windows es el objeto global en los navegadores
+        //NOTA : Global es el objeto global en node js
+
+        /******************************Constantes ***********************************/
+        /*En JavaScript, los datos se pueden clasificar en dos tipos principales: primitivos y compuestos. */
+        /*  Primitivos:Se acceden directament al valor, ejemplo : string, number, boolean, null, undefined, NaN
+            Compuestos:Se acceden a la referencia del valor ejemplo: 
+            object={} 
+            array=[]
+            funcion(){}
+            Class{}           */
+        //NOTA : No se puede inicializar constantes vacias, si se puede con VAR o LET
+        let a;
+        const PI = 3.1416;      /*No se puede cambiar el valor a una constante de dato primitiva*/
+        // const CONSTANTE; 
+        console.log(PI);
+        a = "peluso"
+        console.log(a);
+        // ahora con objetos y arreglos
+        //NOTA:  En el caso (const objeto = {nombre: "jhon", edad: 34}), objeto es una constante que almacena un objeto compuesto, no puedes reasignar objeto a otro objeto, sí puedes modificar las propiedades del objeto al que apunta.
+        let objeto = {
+            nombre: "jhon",
+            edad: 34
+        }
+
+        const arregoColores = [
+            "blanco", "negro", "azul"
+        ]
+
+        console.log(objeto);
+        console.log(arregoColores);
+        /*NOTA : Para acceder o crear una propiedad del objeto se hace con un punto como se vee abajo*/
+        objeto = {
+            nombre: "jhon",
+            edad: 14,
+            correo: "@gmail"
+        }
+        console.log(objeto)
+        console.log(objeto.nombre)
+        console.log(objeto["correo"])
+        /*NOTA : Para agregar al arreglo se usa la funcion PUSH */
+        arregoColores.push("anaranjado")
+        console.log(arregoColores)
+        console.log(arregoColores[1])
+
+        /******************************Cadenas de Texto(Strings)***********************************/
+        {
+            let nombre = "jhonatan";
+            let apellido = 'Peluso';
+            let segundoNombre = `Yataco`;
+            let saludo = new String('Hola Mundo');
+            let lorem = "   Debido a que los niveles de radiación se vienen incrementando a lo largo del país, entre “muy alta” y “extremadamente alta”, especialistas del Senamhi reiteraron la recomendación a la población de  adoptar medidas de fotoprotección como el uso de gorros de ala ancha, uso de sombrillas, lentes de sol, prendas de manga larga, protectores solares, así como la reducción de los tiempos de exposición al sol.   "
+
+            console.log(nombre, apellido, segundoNombre, saludo);
+            console.log(nombre.length,
+                apellido.length,
+                segundoNombre.length,
+                saludo);
+            console.log(
+                nombre.toUpperCase(),
+                apellido.toLowerCase(),
+                lorem.includes("sol"),
+                lorem,
+                lorem.trim(),
+                lorem.split(","))
+        }
+        /******************Plantillas de cadenas de texto(Template Strings)*********************/
+        let nombre = "Jhonatan";
+        let apellido = "Yataco";
+        let saludo = "Hola mi nombre es: "
+
+        console.log(saludo + nombre + " " + apellido);
+        //Interpolación de variables: La interpolación de variables es una técnica común en muchos lenguajes de programación que permite insertar valores de variables dentro de una cadena de texto de forma más legible y conveniente.
+        //Template String
+        let saludo2 = `Hola mi nombre es: ${nombre} ${apellido}`
+        console.log(saludo2)
+
+        let ul = `  
+        <ul>
+            <li>Spring</li>
+            <li>Summer</li>
+            <li>Autumn</li>
+            <li>Winter</li>
+        </ul>
+        `
+        console.log(ul)
+
+        /******************************Numeros(Numbers)***********************************/
+        /*Un método es una función que está asociada con un objeto específico o tipo de objeto.Los métodos son miembros de clases u objetos en la programación orientada a objetos.*/
+        /*Una función es un bloque de código que se puede definir una vez y luego llamar o invocar en cualquier parte del programa.
+        Las funciones pueden recibir cero o más argumentos, realizar un procesamiento y devolver un resultado.
+        Las funciones son más generales y no están asociadas con un objeto específico.
+        Se pueden definir funciones dentro o fuera de objetos y clases.
+        Las funciones se pueden invocar directamente utilizando su nombre y los argumentos necesarios.*/
+        //NOTA: la diferencia en la forma de usar c.toFixed(1) y parseInt(c) se debe a que toFixed() es un método de un objeto (Number) y se accede mediante notación de punto, mientras que parseInt() es una función global en JavaScript y no un método de un objeto en particular.
+
+        let aa = 2;
+        let bb = new Number(1);
+        let c = 7.194;
+        let d = "5.6"
+
+        console.log(aa, bb)
+        console.log(c.toFixed(1))
+        console.log(parseInt(c))
+        console.log(parseFloat(c))
+        console.log(parseInt(d))
+        console.log(Number.parseFloat(c))
+        console.log(typeof c, typeof d)
+        console.log(d)
+        let asd = parseFloat(d)
+        console.log(typeof asd)
+        console.log(aa + asd)
+
+        /******************************Booleans***********************************/
+        let verdadero = true;
+        let falso = false;
+        let v = Boolean(true);
+        let f = Boolean(false)
+
+        console.log(v, f)
+        console.log(verdadero, falso);
+        console.log(typeof verdadero, typeof falso)
+        //NOTA: Hay valores que tienden a verdadero y falso
+        console.log(Boolean(0))
+        console.log(Boolean(1))
+        console.log(Boolean(""))
+
+        /*****************************undefined, null & NaN************************************/
+        /*undefined representa la falta de definición de una variable o la ausencia de una propiedad en un objeto.
+          null representa la ausencia intencional de un valor o referencia a un objeto.
+          NaN representa un valor no numérico y se produce cuando se intenta realizar una operación matemática inválida.*/
+
+        let indefinida;
+        console.log(indefinida)
+
+        let nulo = null;
+        console.log(nulo)
+
+        let noEsUnNumero = "hola" * 3;
+        console.log(noEsUnNumero)
+
+        /******************************Funciones***********************************/
+        /*Las funciones en javaScript tambien se consideran objetos*/
+        /*Cuando un lenguaje de programación tiene funciones de primera clase, esto significa que las funciones son ciudadanos de primera clase en ese lenguaje. Es decir, las funciones tienen los mismos derechos y privilegios que otros tipos de datos en el lenguaje, lo que facilita la escritura de código más flexible y expresivo. JavaScript es conocido por ser un lenguaje que admite funciones de primera clase*/
+        /*El término "de primera clase" o "de primer orden" se refiere a la capacidad de tratar a las funciones como cualquier otro tipo de valor en un lenguaje de programación. En el contexto de las funciones en programación, si un lenguaje de programación soporta funciones de primera clase, significa que las funciones pueden ser:*/
+        // Asignadas a variables: Puedes asignar una función a una variable, similar a como asignarías un número o una cadena.
+        const suma = function (a, b) {
+            return a + b;
+        };
+        // Pasadas como argumentos: Puedes pasar una función como argumento a otra función.
+        function operar(a, b, operacion) {
+            return operacion(a, b);
+        }
+
+        console.log(operar(5, 3, suma)); // Imprime: 8
+
+        // Retornadas desde otras funciones: Una función puede devolver otra función como resultado.
+        function crearSumador(x) {
+            return function (y) {
+                return x + y;
+            };
+        }
+
+        const sumar5 = crearSumador(5);
+        console.log(sumar5(3)); // Imprime: 8
+
+
+
+        //Ejemplo de funcion declarada
+        /*Sin retornar*/
+        function estoEsUnaFuncion() {
+            console.log("Uno")
+            console.log("Dos")
+            console.log("Tres")
+        }
+
+        estoEsUnaFuncion();
+        /*Con retorno*/
+        function unaFuncionQueDevuelveValor() {
+            console.log("Uno")
+            console.log("Dos")
+            console.log("Tres")
+            return "Retornando una cadena de texto"
+        }
+
+        let valor = unaFuncionQueDevuelveValor()
+        console.log(valor)
+        /*Con parametros*/
+        function saludar(nombre, edad) {
+            console.log(`Hola mi nombre es ${nombre} y tengo ${edad}`)
+        }
+
+        saludar("jhonatan", 30)
+
+        function saludar(nombre = "Estrada", edad = 29) {
+            console.log(`Hola mi nombre es ${nombre} y tengo ${edad}`)
+        }
+        saludar()
+
+        //Funciones Declaradas: VS Funciones Expresadas:
+        //Funcion Declaradas
+
+        funcionDeclarada()   /*esta llamada a la funcion tambien se vee en consola, a pesar de estar antes de la declaracion de la funcion, y esto es por el hoisting(elevacion)que internamente hace javaScript*/
+
+        function funcionDeclarada() {
+            console.log("Esto es una funcion declarada y puede invocarse en cualquier parte de nuestro código, incluso antes de que la funcion sea declarada")
+        }
+
+        funcionDeclarada()
+
+        //Funciones Anónimas:
+        /*todas las funciones anónimas son funciones expresadas */
+        /*Una función anónima es aquella que no tiene un nombre específico, es decir, no se le asigna un identificador.*/
+        /*Puede ser una función expresada (asignada a una variable o constante) o puede ser la parte de una expresión más grande, como un argumento pasado a otra función.*/
+        // A diferencia de las funciones declaradas, las funciones expresadas no se elevan (hoist), por lo que no se pueden llamar antes de su definición.
+
+        //FuncionExpresada 
+        /*Una función expresada es simplemente una función que se asigna a una variable o constante o se pasan como argumento a otras funciones.
+          Puede ser anónima (sin nombre) o tener un nombre.
+          Su característica principal es que se asigna a una variable o constante, por lo que se puede pasar como argumento a otras funciones o asignarla dinámicamente durante la ejecución del código.*/
+
+        const funcionExpresada = function () {
+            console.log("A diferencia de las declaraciones de funciones, las expresiones de función no se elevan (hoist), por lo que no se pueden llamar antes de su definición.")
+        }
+
+        funcionExpresada()
+
+        /******************************Arreglos***********************************/
+
+        const aaa = []; /*Declarando arreglo vacio*/
+        const bbb = [1, true, "Hola", ["A", "B", "C", [1, 2, 3]]] /*Declarando arreglo con elementos*/
+        console.log(aaa)
+        console.log(bbb)
+        console.log(bbb.length)
+        console.log(bbb[3][0])
+        console.log(bbb[3][3][1])
+
+        const cc = Array.of("X", "Y", "Z", 9, 8, 7)   /*Array.of() es un método estático de la clase Array en JavaScript. Toma cualquier número de argumentos y los utiliza como elementos del nuevo array que crea.*/
+        console.log(cc)
+
+        const dd = Array(10).fill(false);
+        console.log(dd)
+
+        const ddd = Array.of("A", "B", 1, 2, "Z", "Y")
+        console.log(ddd)
+        console.log(ddd.fill("hola", 2, 6))
+
+        const e = new Array();
+        console.log(e)
+
+        const colores = ["Rojo", "Verde", "Azul"]
+        console.log(colores)
+        colores.push("Naranja")
+        console.log(colores)
+        colores.pop()
+        console.log(colores)
+
+        colores.forEach(function (el, indice) {       /*El método forEach itera sobre cada elemento del array colores y ejecuta la función proporcionada una vez por cada elemento, imprimiendo cada color en la consola en este caso.*/
+            console.log(`<li id="${indice}">${el}</li>`)
+        })
+
+        /******************************Objetos***********************************/
+        /* es importante tener en cuenta que en la mayoría de los casos, no es necesario crear objetos de tipo string utilizando new String(). JavaScript automáticamente convierte los strings literales en objetos de tipo string cuando se necesitan*/
+        //La palabra clave new Indica que se debe crear un nuevo objeto y se debe invocar el constructor de la clase para inicializarlo
+        /*NOTA : Para acceder o crear una propiedad del objeto se hace con un punto como se vee abajo*/
+        /*Puedes agregar propiedades a un objeto en JavaScript utilizando la notación de punto (.) o la notación de corchetes ([]).*/
+
+        let aaaa = new String("Hola");
+        console.log(typeof aaaa)
+
+        /*Creando objeto usando constructor*/
+        const ccc = new Object();
+        ccc.nombre = "Juan";
+        ccc.edad = 30;
+        ccc["profesion"] = "Ingeniero"
+        console.log(ccc)
+        /*Ambos métodos crean un nuevo objeto vacío, pero el uso de la notación literal de objeto {} es más común y más legible en la mayoría de los casos.*/
+        const b = {}
+        console.log(b)
+
+        /*dentro de un objeto a las variables se le van a llamar atributos/propiedades y
+        a las funciones se les llama métodos*/
+        //en el objeto jhonatan una funcion se define de diferente manera?  Sí, en el objeto jhonatan, la función se define dentro del objeto utilizando la notación de propiedad de función. 
+        //La "notación de propiedad de función"- Es una forma de asignar una función como valor de una propiedad en un objeto. 
+        //En el objeto jhonatan, tanto saludar como decirMiNombre son atributos (o propiedades) de ese objeto. En este caso, son atributos de tipo función, lo que significa que son métodos del objeto jhonatan.
+        /*Propiedades de tipo funcion y propiedades de tipo datos*/
+        //En JavaScript, las propiedades de tipo datos son simplemente pares de clave-valor que asignan un valor a una clave específica en un objeto
+        const jhonatan = {
+            nombre: "Jhonatan",
+            apellido: "Yataco",
+            edad: 35,
+            pasatiempos: ["correr", "hacer ejercicio", "guitarra"],
+            soltero: true,
+            contacto: {
+                email: "jhonatan@gmail.com",
+                movil: "+51982874545"
+            },
+            saludar: function () {        /*La propiedad de tipo funcion son llamadas metodos*/
+                console.log("Hola :)")
+            },
+            decirMiNombre: function () {
+                console.log('Hola me llamo' + this.nombre) /*palabra clave que hace referencia al mismo objeto*/
+                console.log(`Hola me llamo ${this.nombre} ${this.apellido}`)
+            }
+        }
+
+        console.log(jhonatan)
+        console.log(jhonatan["edad"])
+        console.log(jhonatan.pasatiempos)
+        console.log(jhonatan.pasatiempos[2])
+        console.log(jhonatan.contacto)
+        console.log(jhonatan.contacto.email)
+        console.log(jhonatan.saludar())
+        console.log(jhonatan.decirMiNombre())
+
+        console.log(Object.keys(jhonatan)) /*El método Object.keys() en JavaScript devuelve un array de las propiedades enumerables de un objeto. */
+        //NOTA : En JavaScript, Object es tanto una función constructora(en JavaScript que se utiliza para crear nuevos objetos) como un objeto. Object Además de ser un constructor para crear objetos, Object también es un objeto global en JavaScript. Esto significa que Object tiene propiedades y métodos propios que puedes utilizar para trabajar con objetos en JavaScript.
+        console.log(jhonatan.hasOwnProperty("apellido"))  /*Verificar si un objeto tiene una propiedad específica:*/
+
+        /******************************Tipo de Operadores***********************************/
+        let aaaaa = 5 + (5 - 10) * 3;
+        let modulo = 5 % 2;
+        console.log(aaaaa)
+        console.log(modulo)
+
+        //Operadores relacionales
+
+        console.log(8 > 9);
+        console.log(10 > 9);
+        console.log(7 >= 9);
+        console.log(7 <= 7);
+
+        /*
+        = asignacion de variables
+        == comparacion de valores
+        === comparacion de tipo de dato y de valor
+        */
+
+        console.log(0 == false)
+        console.log(0 === false)
+        console.log("7" == 7) /*Es una mala practica comparar con 2 iguales*/
+        console.log("7" === 7)
+
+        //Operadores de incremento o decremento
+
+        let i = 1
+        i = i + 2
+        i += 3
+        console.log(i)
+        let g = 2
+        g *= 3
+        console.log(g)
+
+        //operador unario(cuando va de 1 en 1)
+
+        let j = 3;
+        j++;
+        j--;
+        ++j;
+        --j;
+        console.log(j)
+        /*
+          Cuando se asigna a una segunda variable se vee la diferencia, entre i++ e ++i
+          i++: Es conocido como operador de incremento postfijo. Este primero va asignar el valor de i a la variable resultado y despues recien incrementa
+          ++i: Es conocido como operador de incremento prefijo. Este primero incrementa su valor y despues se asigna a la variable */
+
+        let h = 5
+        console.log(h)
+        let resultado = h++ + 4  // Incrementa h después de utilizar su valor
+        console.log(resultado)
+        console.log(h)
+
+        /*Operadores Logicos
+        AND - &&
+        OR - ||
+        ! - niega
+        NOT
+        */
+        console.log((9 === 8) || ("9" === 9))
+        console.log((9 === 9) && (8 === 8))
+
+        /***************************Estructuras de control:Condicionales y Switch*******************************/
+        /* 
+           secuenciales: va una detras de la otra
+           Condicionales: Permiten ejecutar diferentes bloques de código dependiendo de una condición. Esto incluye if, else, else if, y el operador ternario (? :).
+           Bucles (loops): Permiten ejecutar un bloque de código varias veces. Los bucles más comunes son for, while, y do...while.
+           Switch: Una estructura que permite ejecutar diferentes bloques de código dependiendo del valor de una expresión.
+           Bucles de iteración: Estructuras como for...of y for...in que se utilizan para iterar sobre elementos de objetos iterables, como arrays y mapas.*/
+
+        let edad = 17;
+
+        if (edad > 17) {
+            console.log("Eres mayor de Edad")
+        } else {
+            console.log("Eres menor de Edad")
+        }
+        if (edad >= 18) {
+            console.log("Eres mayor de Edad")
+        } else {
+            console.log("Eres menor de Edad")
+        }
+        /*
+        Dejame dormir - hrs - 5hrs
+        Buenos dias 6hrs - 11hrs
+        Buenas tardes 12hrs - 18hrs
+        Buenas noches 19hrs - 23hrs 
+        */
+        let hora = 20;
+        if (hora >= 0 && hora <= 5) {
+            console.log("Dejame dormir")
+        } else if (hora >= 0 && hora <= 11) {
+            console.log("Buenos dias")
+        } else if (hora >= 12 && hora <= 18) {
+            console.log("Buenas tardes")
+        } else {
+            console.log("Buenas noches")
+        }
+        /*Operador ternario(condicion) ? verdadero:falsa*/
+        /* Es una forma concisa de escribir una declaración if...else.*/
+        /*En un operador ternario solo puedes ejecutar una linea de codigo*/
+
+        let edades = 19
+        let mayorEdad = (edades >= 18) ? "Eres mayor de Edad" : "Eres menor de edad"
+        console.log(mayorEdad)
+
+        /*---Switch-----*/
+
+        let diaSemana = 3;
+        switch (diaSemana) {
+            case 1:
+                console.log("Lunes");
+                break;
+            case 2:
+                console.log("Martes");
+                break;
+            case 3:
+                console.log("Miércoles");
+                break;
+            case 4:
+                console.log("Jueves");
+                break;
+            case 5:
+                console.log("Viernes");
+                break;
+            default:
+                console.log("Fin de semana");
+        }
+
+        /***************************Estructuras de control:Ciclo(Loops)*******************************/
+        /*while se tiene que cumplir la condicion para ejecutarse a menos una vez*/
+        let contador = 0;
+        while (contador < 5) {
+            console.log("while Contador:", contador);
+            contador++
+        }
+
+        /*do while al menos se ejecuta una vez aunque no cumpla con la condicion while*/
+        let contador2 = 0;
+        do {
+            console.log("do while Contador2:", contador2);
+            contador2++
+        } while (contador2 < 5);
+
+        /*bucle for*/
+        for (let i = 0; i < 5; i++) {
+            console.log("Iteración", i);
+        }
+
+        let numeros = [10, 20, 30, 40, 50, 60, 70, 80, 90]
+        for (let i = 0; i < numeros.length; i++) {
+            console.log(numeros[i])
+        }
+
+        /*Desde ecmascript 6 viniero variante del for que son el for ..off y el for...in*/
+        //El bucle for...of se utiliza para iterar sobre elementos de objetos iterables, como arrays y strings, proporcionando un acceso directo al valor de cada elemento en cada iteración.
+        const numeros2 = [1, 2, 3, 4, 5];
+        for (let numero of numeros2) {
+            console.log(numero);
+        }
+
+        const mensaje = "Hola";
+        for (let caracter of mensaje) {
+            console.log(caracter);
+        }
+
+        //El bucle for...in se utiliza para iterar sobre las propiedades enumerables de un objeto. En cada iteración, el bucle proporciona el nombre de la propiedad (clave) de cada propiedad del objeto.
+        const persona = {
+            nombre: "Juan",
+            edad: 30,
+            ciudad: "Barcelona"
+        };
+        console.log(persona.nombre)
+        console.log(persona["nombre"])
+
+        for (let propiedad in persona) {
+            console.log(propiedad + ": " + persona[propiedad]);
+        }
+
+        /***************************Manejo de errores try catch finally*******************************/
+        /* son bloques utilizados en JavaScript para manejar errores de manera controlada.*/
+        /* try: Este bloque contiene el código que se quiere ejecutar y se evalúa en busca de errores.
+           catch: Si ocurre un error dentro del bloque try, el control se transfiere al bloque catch, donde se puede manejar el error capturado. El bloque catch recibe un objeto que representa el error.
+           finally: Este bloque opcional se ejecuta siempre, independientemente de si se produce un error o no. Se utiliza comúnmente para ejecutar código de limpieza, como cerrar archivos o conexiones de bases de datos, sin importar si hubo un error o no.*/
+
+        //Nos ayuda sobre todo cuando hacemos llamadas a apis o desarrollamos una
+        try {
+            console.log("En el Try se agrega el codigo a evaluar")
+            xxx
+        } catch (error) {  //captura el error y se puedes acceder al objeto de error utilizando el nombre que especificaste entre paréntesis,en este caso (error). 
+            console.log("El bloque catch recibe un objeto que representa el error.")
+            console.log(error)
+        } finally {
+            console.log("Este bloque opcional se ejecuta siempre")
+        }
+
+        //-----
+        try {
+            let numero = "asd"
+            if (isNaN(numero)) {
+                throw new Error("El caracter producido no es un numero")
+            }
+        } catch (error) {
+            console.log("Se produjo el siguiente error: " + error)
+        }
+
+        /***************************break & continue*******************************/
+        // Este break y coninue no se puede usar en for of y el for in de ecmaScript 6
+        //La declaración break se utiliza para salir prematuramente de un bucle. Cuando se ejecuta break, el control del programa sale del bucle más cercano en el que está contenido.
+
+        for (let i = 0; i < 10; i++) {
+            if (i === 5) {
+                break; // Sale del bucle cuando i es igual a 5
+            }
+            console.log(i);
+        }
+
+        let arreglo = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+        for (let i = 0; i < arreglo.length; i++) {
+            if (arreglo[i] % 2 !== 0) {
+                continue
+            }
+            console.log(arreglo[i])
+        }
+
+
+        //La declaración continue se utiliza para saltar la iteración actual de un bucle y continuar con la siguiente iteración. Cuando se ejecuta continue, el control del programa salta al final del bloque de código del bucle, donde se realiza la siguiente iteración.
+        for (let i = 0; i < 5; i++) {
+            if (i === 2) {
+                continue; // Salta la iteración cuando i es igual a 2
+            }
+            console.log(i);
+        }
+
+
+        /***************************destructuracion*******************************/
+        // La destructuración en JavaScript es una característica que permite desempaquetar valores de arrays o propiedades de objetos en variables individuales de forma más concisa. 
+        //Destructuración de Arrays:Permite extraer valores de un array y asignarlos a variables individuales.
+        //La desetructuracion tambien puede usarse para acceder a las propidedades del los valores del objeto
+        const arreglo2 = [5, 6, 7, 8];
+        //Sin destructuración
+        let uno = arreglo2[0],
+            dos = arreglo2[1],
+            tres = arreglo2[2]
+
+        console.log(uno) // Output: 5
+
+        let [one, ...resto] = arreglo2  //...resto es spread operato // Output: [6, 7, 8]
+        console.log(resto)
+
+        // Destructuración del array
+        const [x, y, z, w] = arreglo2;
+
+        console.log(x); // 1
+        console.log(y); // 2
+        console.log(z); // 3
+        console.log(w); // 3
+
+        //Destructuración de Objetos:Permite extraer propiedades de un objeto y asignarlas a variables con el mismo nombre.
+
+        const persona2 = {
+            nombre1: "Juan",
+            edad1: 30,
+            ciudad1: "Barcelona"
+        };
+
+        // Destructuración de objeto
+        // para que funcione la destructuracion en un objeto la variables se deben llamar igual que las propiedades del objeto
+        const { nombre1, edad1, ciudad1 } = persona2;
+
+        console.log(nombre1); // "Juan"
+        console.log(edad1);   // 30
+        console.log(ciudad1); // "Barcelona"
+
+        /***************************Objetos Literales*******************************/
+        //Es una nueva forma de escribir atributos y metodos
+        //Los objetos literales en JavaScript son una forma de definir objetos de manera concisa y directa en el código. No son necesariamente una "nueva forma" de escribir atributos y métodos, sino más bien una de las formas más comunes y simples de crear objetos en JavaScript.
+
+        let nombre3 = "jhonatan",
+            edad3 = 30
+
+        const people = {
+            nombre3: nombre3,
+            edad3: edad3,
+            nacionalidad: "peruano",
+            saludar: function () {
+                console.log(`Hola soy ${this.nombre3} tengo ${this.edad3} años`)
+            }
+        }
+        console.log(people)
+        people.saludar()
+        //Utilizando la sintaxis de objeto literal mejorada introducida en ES6 /* En esta sintaxis, si tienes una variable con el mismo nombre que la propiedad que deseas definir en el objeto, puedes simplemente escribir el nombre de la variable sin asignarla explícitamente.*/
+        /*La función saludar se define utilizando una sintaxis abreviada introducida en ES6. En lugar de usar la palabra clave function, se define directamente el nombre de la función seguido de los paréntesis de parámetros (en este caso, no hay parámetros) y el cuerpo de la función encerrado en llaves {}.*/
+        const people2 = {
+            nombre3,
+            edad3,
+            nacionalidad: "peruano",
+            saludar() {
+                console.log(`Hola soy ${this.nombre3} tengo ${this.edad3} años`)
+            }
+        }
+        console.log(people2)
+        people.saludar()
+
+        /************************Parametros Rest & Operador Spread ****************************/
+        /*Los parámetros REST permiten a una función aceptar un número indefinido de argumentos como un array. Se denotan mediante tres puntos (...) seguidos de un nombre de variable*/
+        /*Dentro de la función, los parámetros REST se comportan como un array que contiene todos los argumentos restantes pasados a la función.*/
+        function sum(...theArgs) {
+            let total = 0;
+            for (const arg of theArgs) {
+                total += arg;
+            }
+            return total;
+        }
+
+        console.log(sum(1, 2, 3, 4));
+
+        function sumar(a, b, c, ...d) {
+            let resultado = a + b + c
+
+            d.forEach(function (a) {
+                resultado += a
+            })
+
+            return resultado
+        }
+        console.log(sumar(1, 2, 3))
+
+        /*Operador Spread*/
+        /*La sintaxis extendida o spread syntax permite a un elemento iterable tal como un arreglo o cadena ser expandido en lugares donde cero o más argumentos, elementos son esperados*/
+        /*Unu objeto le permite ser expandido en lugares donde cero o más pares de valores clave son esperados.*/
+        /* ... significa que toma los elementos del arreglo*/
+        //Ejemplo 1
+        function sum(x, y, z) {
+            return x + y + z;
+        }
+        const numbers = [1, 2, 3];
+        console.log(sum(...numbers));
+        //Ejemplo 2
+        const dias1 = ["lunes", "martes", "miercoles"]
+        const dias2 = [...dias1, "jueves", "viernes", "sabado", "domingo"]
+
+        console.log(dias2)
+        //Ejemplo 3
+        const objeto1 = {
+            modelo: "Huawei p10"
+        }
+        const objeto2 = {
+            precio: "200 so"
+        }
+        const objeto3 = {
+            ...objeto1,
+            ...objeto2
+        }
+        console.log(objeto3)
+
+        /******************************Arrow Functions ********************************/
+        //Una arrow functions es quitar la palabra function 
+        //y agregar entre en parentesis y la llaves esta flecha =>
+
+        const saludar2 = function () {
+            console.log("Hola Mundo!!")
+        }
+        const saludar3 = () => {
+            console.log("Hola Mundo flecha")
+        }
+        //Cuando tiene una sola linea se puede quitar las llaves y queda asi
+        const saludar4 = () => console.log("Hola Mundo sin llaves")
+
+        const saludar5 = (nombre) => console.log(`Hola ${nombre}`)
+        //Cuando una funcion flecha no recibe parametro se pone los parentesis
+        //Pero cuando lleva un solo parametro, se le puede quitar los () y dejar el parametro solo, si tiene mas parametro si se coloca los parentesis
+        const saludar6 = nombre => console.log(`Hola ${nombre}`)
+
+        saludar2()
+        saludar3()
+        saludar4()
+        saludar5("jhonatan")
+        saludar6("marcelo")
+
+        //Ejemplo2
+        //Tambien podemos omitir la palabra return
+        const sumar1 = function (a, b) {
+            return a + b
+        }
+        console.log(sumar1(2, 4))
+        //--
+        const sumar2 = (a, b) => a + b;
+
+        console.log(sumar2(4, 6))
+        //Ejemplo3
+
+        const numeros1 = [1, 2, 3, 4, 5]
+        numeros1.forEach(function (param1, param2) {
+            console.log(`el elemento ${param1} esta en la posicion ${param2}`)
+        })
+
+        const numeros3 = [6, 7, 8, 9, 10]
+        numeros3.forEach((param1, param2) => console.log(`${param1} esta en la posicion ${param2}`))
+
+        //Las Arrow  Functions capturan el OBJETO THIS del contexto donde se encuentren
+        //NOTA: Window es el objeto global del DOM que representa al navegador
+        //las funciones flecha no tienen su propio this y, por lo tanto, this hace referencia al ámbito global (en el navegador, sería window), donde no existe una propiedad valor.
+
+        function perro() {
+            console.log(this)
+        }
+        perro()
+
+        const perro1 = {
+            nombre: "cyndi",
+            funcionRegular: function () {
+                console.log(this);
+            }
+        };
+
+        perro1.funcionRegular()
+
+        const perro2 = {
+            nombre: "peluso",
+            edad: "10k",
+            ladrar: () => {
+                console.log(this)
+            }
+        }
+
+        perro2.ladrar()
+
+        //Las funciones flecha noo tienen prototype: A diferencia de las funciones regulares, las funciones flecha no tienen la propiedad prototype. Esto significa que no pueden ser utilizadas como constructores para crear nuevos objetos.
+
+        /******************************Prototipos ********************************/
+        //JavaScript es una lenguaje que puede ser orientado a objetos pero no basado en clases sino en prototipos
+        //Lo que hace el navegador con una clase es transformarlo a una funcion prototipal 
+        // En JavaScript, prototype es una propiedad que todas las funciones tienen. Es un objeto que actúa como un plano o molde para la creación de otros objetos. Se utiliza principalmente en el contexto de la herencia prototípica en JavaScript.
+        /*Cuando defines una función en JavaScript, esta automáticamente obtiene una propiedad llamada prototype, la cual es un objeto vacío por defecto. Puedes agregar propiedades y métodos a este objeto prototype, y cualquier objeto creado a partir de esa función como constructor heredará estas propiedades y métodos.*/
+        //Las funciones pueden se utilizadas como constructores para crear nuevos objetos0
+        /*En JavaScript, la terminología puede ser confusa porque se utiliza tanto la palabra "clase" como la palabra "constructor". 
+        En el contexto de JavaScript, la palabra "clase" no se refiere a clases en el sentido tradicional de la programación orientada a objetos 
+        (POO) en lenguajes como Java o C++. En cambio, JavaScript utiliza funciones constructoras y prototipos para lograr la herencia y la 
+        reutilización de código.*/
+        //Object no es una clase en el sentido tradicional, se comporta de manera similar a una clase en JavaScript. Es decir, es una función constructora que se utiliza para crear objetos y proporciona métodos y propiedades que pueden ser utilizados por los objetos creados.
+        //Funcion constructora
+        //No se devuelve explícitamente un valor: En una función constructora, no se debe devolver explícitamente un valor. El objeto que se está creando se devuelve automáticamente cuando se invoca la función con el operador new.
+        function Animal(nombre, genero) {
+            this.nombre = nombre   //Uso de this: Dentro de la función, this se refiere al nuevo objeto que se está creando. Aquí, se están asignando propiedades (nombre y genero) al objeto usando this.
+            this.genero = genero
+
+
+            this.saludar = function () {
+                console.log(`Mi nombre es ${nombre}`)
+            }
+        }
+
+        //Metodo agregado al prototipo de la funcion
+        Animal.prototype.sonar = function () {
+            console.log("DESDE AFUERA DE LA FUNCION")
+        }
+
+        Animal.prototype.sonar()
+
+        const snoopy = new Animal("snoopy", "macho")
+        const snoopy2 = new Animal("peluso", "macho")
+        const snoopy3 = new Animal("cindy", "hembre")
+
+        console.log(snoopy)
+        console.log(snoopy2)
+        console.log(snoopy3)
+
+        /******************************Herencia prototipica o herencia de prototipos ********************************/
+        //El __proto__ hace referencia al prototipo del objeto principal, es decir objeto.__proto__.propiedad puede accder a todas sus propiedades del proto del objeto principal
+        //Si una propiedad no se encuentra en el objeto mismo, hay un intento de buscarla en el prototipo,sino se encontró entonces se busca en el prototipo del prototipo,etc.Tecnicamente se conoce como envio dinamico o delegación
+        //NOTA : En JavaScript, cuando defines una clase y estableces su prototipo para heredar de otra clase, es importante asegurarse de que el constructor de las instancias creadas apunte a la función constructora correcta. Esto se hace estableciendo explícitamente la propiedad constructor del prototipo de la clase hija.
+
+        /*En JavaScript, cuando defines una función constructora y la utilizas para crear objetos con new, lo que sucede es que:
+
+        Se crea un nuevo objeto vacío.
+        Se establece el contexto de this en ese nuevo objeto.
+        Se ejecuta el código dentro de la función constructora en el contexto de ese objeto.
+        El objeto creado se devuelve automáticamente, a menos que la función constructora devuelva explícitamente otro objeto.*/
+
+        //Herencia prototipica o herencia de prototipos 
+        // Definición de la función constructora Persona
+        function Persona(nombre, edad) {
+            this.nombre = nombre;
+            this.edad = edad;
+        }
+
+        Persona.prototype.sonar = function () {
+            console.log("Hago sonidos :D")
+        }
+
+        // Definición de la función constructora Estudiante
+        function Estudiante(nombre, edad, grado) {
+            // simplemente está asignando la función Persona a una propiedad llamada super en el objeto actual (que es una instancia de Estudiante)
+            this.super = Persona;
+            /*
+            Al llamar a this.super(nombre, edad); dentro del constructor de Estudiante, se está ejecutando el código dentro del constructor de la superclase Persona. Aunque no estás creando una nueva instancia de Persona, estás utilizando el código dentro de su constructor para inicializar propiedades heredadas en el contexto de Estudiante.*/
+            this.super(nombre, edad); // Llama al constructor de Persona con los argumentos suministrados
+            this.grado = grado;
+        }
+
+        // Establece el prototipo de Estudiante como una instancia de Persona
+        Estudiante.prototype = new Persona();
+        // Establece el constructor de Estudiante correctamente despues de asignar su prototipo para asegurarnos que apunte al constructor correcto
+        Estudiante.prototype.constructor = Estudiante
+
+        //Sobrescribiendo el metodo de la clase Padre
+        Estudiante.prototype.sonar = function () { console.log("Hago sonido 2") }
+
+        Estudiante.prototype.sonar()
+
+        Estudiante.prototype.ladrar2 = function () {
+            console.log("Guauuu,Guauuu")
+        }
+
+        Estudiante.prototype.ladrar2()
+
+
+        // Crea una nueva instancia de Estudiante
+        var estudiante1 = new Estudiante("Juan", 20, "Universitario"),
+            estudiante2 = new Persona("Jhon", 30, "6to")
+
+
+        // Imprime en la consola los atributos de estudiante1
+        console.log(estudiante1);
+        console.log(estudiante2);
+
+        /******************************Clases y Herencia ********************************/
+
+        class Animal2 {
+
+            constructor(nombre, genero) {
+                this.nombre = nombre;
+                this.genero = genero;
+            }
+
+            sonar() {
+                console.log("Hago sonidos")
+            }
+
+            saludar() {
+                console.log(`Hola me llamo ${this.nombre}`)
+            }
+
+        }
+
+        class Perro extends Animal {
+            constructor(nombre, genero, tamanio) {
+                super(nombre, genero)
+                this.tamanio = tamanio
+                this.raza = null;
+            }
+
+            sonar() {
+                console.log("Reescribiendo el metodo sonar")
+            }
+
+            ladrar() {
+                console.log("Ladrando")
+            }
+
+            static metodoEstatico() {
+                console.log("Soy un metodo estatico que me puedo ejecutar sin necesidad de instanciar la clase")
+            }
+            //Es un metodo o funcion pero para llamarlo o asignarle valor no se usa como funcion sino como propiedad
+            get getRaza() {
+                return this.raza
+            }
+
+            set setRaza(raza) {
+                this.raza = raza
+            }
+
+
+        }
+        const mimi = new Animal2("Mimi", "Hembra"),
+            scooby = new Perro("Scooby", "Macho", "Gigante")
+
+        console.log(mimi)
+        console.log(scooby)
+        mimi.sonar()
+        mimi.saludar()
+        scooby.sonar()
+        Perro.metodoEstatico()
+        scooby.setRaza = "chihuahua"
+        console.log(scooby.getRaza)
+
+        /****************************** Objeto console ********************************/
+        {
+            console.log(console)
+
+            let nombre = "jhonatan"
+            apellido = "Yataco"
+            edad = 30
+            console.log(nombre, apellido, edad)
+            console.log(`Hola mi nombre es ${nombre}`)
+            //Este código en JavaScript utiliza la función console.log() para imprimir un mensaje en la consola del navegador o en el entorno de Node.js.
+            // La sintaxis utilizada para imprimir el mensaje es conocida como "plantilla de cadena" o "template string". En esta plantilla, se pueden incluir marcadores de posición dentro del string del mensaje, que se indican con %s para cadenas y %d para números enteros.
+            console.log(`Hola mi nombre es %s %s y tengo %d años`, nombre, apellido, edad)
+            //window es un objeto global que representa la ventana del navegador
+            //Este objeto proporciona acceso a diversas propiedades y métodos que interactúan con la ventana del navegador y su contenido.
+            console.log(window)
+            //El objeto document en JavaScript representa el documento HTML actual que está siendo mostrado en el navegador. 
+            console.log(document)
+            console.dir(document)
+
+            console.group("Cursos de JavaScript")
+            console.log("Curso de HTML")
+            console.log("Curso de CSS")
+            console.log("Curso de SQL")
+            console.groupEnd()
+            console.log("hola")
+
+            console.log(console);
+            console.table(Object.entries(console).sort())
+
+            //arreglo de numeros
+            const numeros = [1, 2, 3, 4, 5]
+            vocales = ["a", "b", "i", "o", "u"]
+
+            console.table(numeros)
+            console.table(vocales)
+
+            const perro = {
+                nombre: "peluso",
+                edad: "10años"
+            }
+            console.table(perro)
+            //para que puedas saber cuanto tarda tu codigo
+            /*
+    
+            console.time("Cuanto tiempo tarda mi codigo")
+            const arreglo = Array(1000000); // const arreglo = new Array(1000000);//se puede crear un arreglo sin la palabra NEW tambien
+            console.log(arreglo)
+            for(let i= 0;i < arreglo.length;i++){
+                arreglo[i]=i
+            }
+            console.timeEnd("Cuanto tiempo tarda mi codigo")
+            console.log(arreglo)
+    
+            */
+
+            ////
+
+            for (let i = 0; i < 100; i++)
+                console.count("codigo for")
+            console.log(i)
+
+            let x = 3,
+                y = 2,
+                pruebaXY = "Se espera que X siempre sea menor que Y"
+            console.assert(x < y, { x, y, pruebaXY })      //sirve para hacer pruebas sencillas
+        }
+        console.log("holas")
+
+        /****************************** Objeto Date ********************************/
+
+        // Los objetos Date representan en JavaScript un momento fijo en el tiempo en un formato independiente. El objeto Date contiene un Number que representa los milisegundos transcurridos desde el 1 de Enero de 1970 UTC.
+        console.log(Date());
+        let fecha = new Date();
+        console.log(fecha.getDate());
+        //dia de la semana D L M Mi J V S => 0 1 2 3 4 5 6 
+        console.log(fecha.getDay());
+        //mes Ene Feb Mar Abr May Jun Jul Ago Sep Oct Nov Dic
+        //    0   1   2   3   4   5   6   7   8   9   10  11
+        console.log(fecha.getMonth()); //El mes
+
+        console.log(fecha.getFullYear()) //El año
+
+        console.log(fecha.getHours()) // La hora
+
+        console.log(fecha.getMinutes()) // Minutos
+
+        console.log(fecha.getSeconds()) // Segundos
+
+        console.log(fecha.getMilliseconds()) // Milisegundos
+
+        console.log(fecha.toString())
+
+        console.log(fecha.toDateString())
+
+        console.log(fecha.toLocaleString()) //la fecha y hora
+
+        console.log(fecha.toLocaleDateString()) // la fecha
+
+        console.log(fecha.toLocaleTimeString())
+
+        console.log(fecha.getUTCDate())
+
+        console.log(fecha.getUTCHours())
+        //El método Date.now() en JavaScript devuelve el número de milisegundos transcurridos desde el 1 de enero de 1970 00:00:00 UTC (época Unix). Es decir, devuelve el tiempo actual en milisegundos.
+        console.log(Date.now())
+
+        let fechaCumple = new Date(1989, 8, 22);
+        console.log(fechaCumple)
+
+        /****************************** Objeto Math ********************************/
+        // A diferencia de los demás objetos globales, el objeto Math no se puede editar. 
+        //Todas las propiedades y métodos de Math son estáticos
+
+        console.log(Math.PI)
+        console.log(Math.abs(-8.2)) //Valor absoluto
+        console.log(Math.ceil(7.2)) //Redondea al numero entero mayor
+        console.log(Math.floor(7.8)) //Redondea al numero entero menor
+        console.log(Math.round(4.5))
+        console.log(Math.sqrt(81))
+        console.log(Math.pow(2, 5))
+        console.log(Math.sign(-0.3)) //-1 0 1
+        console.log(Math.random())
+        console.log(Math.floor((Math.random()) * 100) + 1)
+
+        /****************************** Operador de Cortocircuito ********************************/
+        /*
+        Cortocircuito OR - Cuando el valor de la izquierda en la expresión simpre 
+        pueda validar a true, es el valor que se cargará por defecto 
+        Cortocircuito AND - Cuando el valor de la izquierda en la expresión siempre
+        pueda validar a false, es el valor que se cargara por defecto
+        */
+        function saludar(nombre) {
+            nombre = nombre || "Desconocido"
+            console.log(`Hola ${nombre}`)
+        }
+
+        saludar()
+
+        console.log("cadena" || "Valor de la derecha")
+        console.log(19 || "Valor de la derecha")
+        console.log(true || "Valor de la derecha")
+        console.log([] || "Valor de la derecha")
+        console.log(false || "Valor de la derecha")
+        console.log(null || "Valor de la derecha")
+        console.log(-2 || "Valor de la derecha")
+        console.log(0 || "Valor de la derecha")
+        console.log("-------------------------------------")
+        console.log("cadena" && "Valor de la derecha")
+        console.log(19 && "Valor de la derecha")
+        console.log(true && "Valor de la derecha")
+        console.log([] && "Valor de la derecha")
+        console.log(false && "Valor de la derecha")
+        console.log(null && "Valor de la derecha")
+        console.log(0 && "Valor de la derecha")
+        console.log(true && "Valor de la derecha")
+
+        /****************************** alert, confirm y prompt ********************************/
+        /*DOM (Document Object Model): Es una interfaz de programación que representa la estructura lógica y jerárquica de un documento HTML (o XML) como un árbol de objetos. El DOM es una representación programática del documento, donde cada elemento, atributo, texto, etc., se representa como un nodo en este árbol*/
+        // El objeto document en JavaScript representa el documento HTML actual que está siendo mostrado en el navegador. Es un objeto importante dentro del DOM (Document Object Model) y proporciona acceso a todos los elementos y contenido del documento HTML
+        //window es un objeto global que representa la ventana del navegador en el entorno del navegador web. Este objeto proporciona acceso a diversas propiedades y métodos que interactúan con la ventana del navegador y su contenido.
+        //Cuando ejecutas código en un entorno de navegador, el objeto window es el objeto global por defecto, por lo que cualquier función o método global que llames se buscará primero dentro del objeto window.
+        /*Por lo tanto, cuando llamas a la función alert() directamente sin especificar window, el navegador automáticamente busca la función alert() dentro del objeto global window. Esto significa que alert("hola") y window.alert("hola") son esencialmente equivalentes en un entorno de navegador web.*/
+
+        // let alerta = alert("Hola esto es una alerta"),
+        // confirmacion = confirm("Hola esto es una confirmación"),
+        // aviso = prompt("Hola esto es un aviso y le permite al usuario ingresar un valor")
+
+        // console.log(alerta)  
+        // console.log(confirmacion) 
+        // console.log(aviso)  
+
+        /****************************** Expresiones Regulares ********************************/
+
+        // Las expresiones regulares, también conocidas como regex o RegExp, son patrones utilizados para buscar y manipular texto basado en ciertas reglas predefinidas. Estas reglas permiten encontrar cadenas de caracteres que coincidan con el patrón especificado.
+        /*En JavaScript, las expresiones regulares se crean utilizando la clase RegExp, que puede ser instanciada directamente o mediante una notación literal encerrada entre barras (/).*/
+        // Las expresiones regulares son importantes para buscar informacion y tambien para validar información
+
+        /*
+                Coincidencias Basicas
+        .       - Cualquier Caracter, excepto nueva linea
+        \d      - Cualquier Digitos (0-9)
+        \D      - No es un Digito (0-9)
+        \w      - Caracter de Palabra (a-z, A-Z, 0-9, _)
+        \W      - No es un Caracter de Palabra.
+        \s      - Espacios de cualquier tipo. (espacio, tab, nueva linea(salto de linea))
+        \S      - No es un Espacio, Tab o nueva linea.
+
+        Limites
+        \b      - Limite de Palabra
+        \B      - No es un Limite de Palabra
+        ^       - Inicio de una cadena de texto
+        $       - Final de una cadena de texto
+
+        Cuantificadores:
+        *       - 0 o Más
+        +       - 1 o Más
+        ?       - 0 o Uno
+        {3}     - Numero Exacto
+        {3,4}   - Rango de Numeros (Minimo, Maximo)
+
+        Conjuntos de Caracteres
+        []      - Caracteres dentro de los brackets
+        [^ ]    - Caracteres que NO ESTAN dentro de los brackets
+
+        Grupos
+        ( )     - Grupo
+        |       - Uno u otro
+
+        */
+        let cadena = "Las expresiones -4 regulares son patrones que se utilizan para hacer coincidir combinaciones de caracteres en cadenas. En JavaScript, las expresiones regulares también son objetos. Estos patrones se utilizan con los métodos exec() y test() de RegExp, y con match(), matchAll(), replace(), replaceAll(), search() y split() métodos de String. Este capítulo describe las expresiones regulares de JavaScript. "
+        let expReg = new RegExp("Expresiones", "i")
+        let expReg3 = /[0-9]/ig
+        let expReg2 = /\d/ig
+        let expReg4 = /expresiones{2,3}/ig
+
+
+        console.log(expReg.test(cadena))  //Devuelve true o false
+        console.log(expReg.exec(cadena))  //Devuelve un arreglo con mas informacion
+        console.log(expReg2.test(cadena))
+        console.log(expReg3.test(cadena))
+        console.log(expReg4.test(cadena))
+        console.log("---------------------------------------")
+
+        let cadena2 = `12345789`
+        // let expReg5 = /\d\d\d.\d\d\d.\d\d.\d\d/g
+        let expReg5 = /[0-5]/g
+
+        console.log(expReg5.test(cadena2))
+
+        let result = cadena2.match(expReg5)  //Para extraer o seleccionar el texto que cumple con la expresión regular en lugar de solo verificar si hay una coincidencia, puedes usar el método match(). Este método devuelve un array con todas las coincidencias encontradas en la cadena.
+        console.log(result)
+
+        /**************************Funciones Anónimas Autoejecutables ****************************/
+        //Este tipo de función es útil cuando deseas encapsular un bloque de código y evitar la contaminación del ámbito global.
+        //Sintaxis de una funcion anonima autoejecutable
+        // función anónima se define entre paréntesis (function() { ... }) y luego se invoca inmediatamente agregando ()
+        {
+        (function () {
+            console.log("Mi primer Funcion anonima autoejecutable");
+        })();
+        (function (d,w,c) {
+            console.log("Mi segunda Funcion anonima autoejecutable");
+            console.log(d)
+            console.log(window)
+            c.log("Este es un console.log")
+        })(document,window,console);
+
+        ((function (){                      //se agrega un parentesis mas para que envuelva todo
+            console.log("version Crockford")
+        })());
+
+        +function(){          //se quita los parentesis y se agrega el mas
+            console.log('version Unaria')
+        }();
+
+        !function(){
+            console.log('version Facebook')
+        }();
+        
+        }
+
+        /**************************Funciones Anónimas Autoejecutables ****************************/
+
+        
+
+    </script>
+</body>
+
+</html>
