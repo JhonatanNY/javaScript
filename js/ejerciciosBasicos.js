@@ -697,6 +697,8 @@ let convertir2 = (numero, base) => {
 
      console.log(instancia)
 
+     //Probando git pull
+
 
   
 
