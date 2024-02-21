@@ -577,13 +577,127 @@ let convertir2 = (numero, base) => {
       if(arr.length === 0) return console.error("El arreglo esta vacio")
       if(arr.length === 1) return console.error("El arreglo debe tener mas de un elemento")
       
+    //   return console.info({
+    //     original:arr,
+    //     sinDuplicados: arr.filter((value,index,self) => self.indexOf(value) === index)
+    //   })
+    //  }
       return console.info({
         original:arr,
-        sinDuplicados: arr.filter((value,index,self) => self.indexOf(value) === index)
+        sinDuplicados: [...new Set(arr)] //se utiliza un Set, que es una estructura de datos que no permite elementos duplicados. Se crea un nuevo Set utilizando new Set(arr)
       })
      }
+
+          
+
 
      quitarDuplicados(["x",10,"x",20,14,"z",20])
 
 
   //26) Programa una función que dado un arreglo de números obtenga el promedio, pe. promedio([9,8,7,6,5,4,3,2,1,0]) devolverá 4.5.
+
+     const promedio = (arr) => {
+        // solucion1
+        // const valorInicial = 0
+        // const prom = arr.reduce((acumulador,valorActual) => (acumulador + valorActual),valorInicial )
+        // return console.log(prom/arr.length)
+        // solucion2
+        return console.info(
+          arr.reduce((total,num,index,arr) => {
+          total += num 
+          if(index === arr.length - 1){
+            return `El promedio de ${arr.join("+")} es ${total/arr.length}`
+          }else{
+            return total
+          } 
+        })
+      )
+
+     }
+
+     promedio([9,8,7,6,5,4,3,2,1,0])
+
+  /*
+  27) Programa una clase llamada Pelicula.
+
+      La clase recibirá un objeto al momento de instanciarse con los siguentes datos: id de la película en IMDB, 
+      titulo, director, año de estreno, país o países de origen, géneros y calificación en IMBD.
+
+        - Todos los datos del objeto son obligatorios.
+        - Valida que el id IMDB tenga 9 caracteres, los primeros 2 sean letras y los 
+          7 restantes números.
+        - Valida que el título no rebase los 100 caracteres.
+        - Valida que el director no rebase los 50 caracteres.
+        - Valida que el año de estreno sea un número entero de 4 dígitos.
+        - Valida que el país o paises sea introducidos en forma de arreglo.
+        - Valida que los géneros sean introducidos en forma de arreglo.
+        - Valida que los géneros introducidos esten dentro de los géneros 
+          aceptados*.
+        - Crea un método estático que devuelva los géneros aceptados*.
+        - Valida que la calificación sea un número entre 0 y 10 pudiendo ser 
+          decimal de una posición.
+        - Crea un método que devuelva toda la ficha técnica de la película.
+        - Apartir de un arreglo con la información de 3 películas genera 3 
+          instancias de la clase de forma automatizada e imprime la ficha técnica 
+          de cada película.
+
+        * Géneros Aceptados: Action, Adult, Adventure, Animation, Biography, Comedy, Crime, Documentary ,Drama, Family, Fantasy, Film Noir, Game-Show, History, Horror, Musical, Music, Mystery, News, Reality-TV, Romance, Sci-Fi, Short, Sport, Talk-Show, Thriller, War, Western.
+
+          
+  */ 
+
+         
+     class Pelicula {
+        
+        constructor({id, titulo, director, estreno, pais, generos, calificacion}){
+          this.id = id,
+          this.titulo = titulo,
+          this.director = director,
+          this.estreno = estreno,
+          this.pais = pais ,
+          this.genero = generos,
+          this.calificacion = calificacion
+
+          this.validarIMDB(id)
+        }
+
+        validarCadena(propiedad, valor){
+          if(!valor) return console.warn(`${propiedad} "${valor}" esta vacio`);
+
+          if(typeof valor !== "string") return console.log(`${propiedad} "${valor}"ingresado, No es una cadena de texto`);
+
+          return true;
+        }
+
+        
+
+        validarIMDB (id){
+          const regex = /^[a-zA-Z]{2}\d{7}$/;
+          if(this.validarCadena("IMDB id",id)){
+            if(!(regex.test(id))){
+              return console.error(`IMDB id "${id}" no es valido, debe tener 9 caracteres, 
+              los 2 primeros letras minusculas, y los 7 resatantes numeros`)
+            }
+          }
+
+        }
+      
+     }
+
+
+     let instancia = new Pelicula({
+      id: 'tt123456', 
+      titulo: 'La Película',
+      director: 'Director X',
+      añoEstreno: 2022,
+      paisesOrigen: ['Estados Unidos', 'Reino Unido'],
+      generos: ['Acción', 'Aventura'],
+      calificacionIMDB: 8.5
+     })
+
+     console.log(instancia)
+
+
+  
+
+  
