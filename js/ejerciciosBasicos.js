@@ -659,6 +659,11 @@ let convertir2 = (numero, base) => {
           this.calificacion = calificacion
 
           this.validarIMDB(id)
+          this.validarTitulo(titulo)
+          this.validarDirector(director)
+          this.validarAnioEstreno(estreno)
+          this.validarArregloPais(pais)
+        
         }
 
         validarCadena(propiedad, valor){
@@ -669,35 +674,86 @@ let convertir2 = (numero, base) => {
           return true;
         }
 
-        
+        validarNumero(propiedad,valor){
+          if(!valor) return console.warn(`${propiedad} "${valor}" esta vacio`)
+          if(typeof valor !== "number") return console.error(`${propiedad} "${valor}" ingresado no es un numero`)
+          return true
+        }
+
+        validarLongitudCadena(propiedad,valor,longitud){
+          if(valor.length > longitud) return console.error(`${propiedad} "${valor}" excede el número de caracteres permitidos(${longitud})`)
+          return true
+        }
+
+        validarArreglo(propiedad,valor){
+          if(!valor) return console.warn(`${propiedad} "${valor}" esta vacio `)
+
+          if(!(valor instanceof Array)) return console.error(`${propiedad} "${valor}" ingresado no es un arreglo`) 
+
+          if(valor.length === 0) return console.error(`${propiedad} "${valor}" no tiene datos`)
+
+          for(let cadena of valor){
+            if((typeof cadena !=="string")) return console.error(`El valor "${cadena}" ingresado, no es una cadenad de texto`)
+          }
+
+          return true
+        }
 
         validarIMDB (id){
           const regex = /^[a-zA-Z]{2}\d{7}$/;
           if(this.validarCadena("IMDB id",id)){
             if(!(regex.test(id))){
-              return console.error(`IMDB id "${id}" no es valido, debe tener 9 caracteres, 
-              los 2 primeros letras minusculas, y los 7 resatantes numeros`)
+              return console.error(`IMDB id "${id}" no es valido, debe tener 9 caracteres, los 2 primeros letras minusculas, y los 7 resatantes numeros`)
             }
           }
-
         }
+
+        validarTitulo (titulo){
+          if(this.validarCadena("Título",titulo)){
+            this.validarLongitudCadena("Título",titulo,100)
+          }
+        }
+        validarDirector (director){
+          if(this.validarCadena("Director",director)){
+            this.validarLongitudCadena("Director",director,50)
+          }
+        }
+
+        validarAnioEstreno(anio){
+          this.validarNumero("Año de estreno",anio)
+          const regex = /^\d{4}$/;
+          if(!(regex.test(anio))){
+            return console.error(`Año de estreno "${anio}" no es válido,ingrese un numero de 4 digitos`)
+          }
+        }
+
       
      }
 
 
-     let instancia = new Pelicula({
-      id: 'tt123456', 
-      titulo: 'La Película',
-      director: 'Director X',
-      añoEstreno: 2022,
-      paisesOrigen: ['Estados Unidos', 'Reino Unido'],
-      generos: ['Acción', 'Aventura'],
-      calificacionIMDB: 8.5
-     })
 
-     console.log(instancia)
+     const peli = {
+      id: 'tt123456',
+      titulo:'01234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789',
+      director:'012345678901234567890123456789012345678901234567890123456789',
+      estreno: 2024,
+      pais:[]
+    };
 
-     //Probando git pull
+      let peliInfo = new Pelicula(peli)
+
+      
+
+     
+   
+    
+ 
+   
+     
+   
+
+
+        //Probando git pull
 
 
   
