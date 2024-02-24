@@ -662,7 +662,9 @@ let convertir2 = (numero, base) => {
           this.validarTitulo(titulo)
           this.validarDirector(director)
           this.validarAnioEstreno(estreno)
-          this.validarArregloPais(pais)
+          this.validarPais(pais)
+          this.validarGeneros(generos)
+          this.validarCalificacion(calificacion)
         
         }
 
@@ -699,6 +701,16 @@ let convertir2 = (numero, base) => {
           return true
         }
 
+        static get listaGeneros() {
+          return ['Action', 'Adult', 'Adventure', 'Animation', 'Biography', 'Comedy', 'Crime', 'Documentary', 'Drama', 'Family', 'Fantasy', 'Film Noir', 'Game-Show', 'History', 'Horror', 'Musical', 'Music', 'Mystery', 'News', 'Reality-TV', 'Romance', 'Sci-Fi', 'Short', 'Sport', 'Talk-Show', 'Thriller', 'War', 'Western'];
+        }
+
+        static generosAceptados(){
+          return console.info(`Los generos aceptados son: ${Pelicula.listaGeneros.join(", ")}`)
+        }
+
+
+
         validarIMDB (id){
           const regex = /^[a-zA-Z]{2}\d{7}$/;
           if(this.validarCadena("IMDB id",id)){
@@ -727,20 +739,91 @@ let convertir2 = (numero, base) => {
           }
         }
 
-      
+        validarPais(pais){
+          this.validarArreglo("Pais",pais)
+        }
+
+        validarGeneros(generos){
+          if(this.validarArreglo("Géneros",generos)){
+            const generosInvalidos = [];
+            for(let genero of generos){
+              if(!(Pelicula.listaGeneros.includes(genero))){
+                generosInvalidos.push(genero);        
+              }
+            }
+            if(generosInvalidos.length > 0){
+              console.error(`Generos incorrectos "${generosInvalidos.join(",")}"`)
+              Pelicula.generosAceptados()
+            }
+          }
+        }
+
+        validarCalificacion(calificacion){
+          if(this.validarNumero("Calificación",calificacion)){
+            return (calificacion < 0 || calificacion > 10)
+            ? console.error('La calificación tiene que estar en un rango entre 0 y 10')
+            : this.calificacion = calificacion.toFixed(1) 
+          }
+        }
+
+        fichaTecnica(){
+          console.info(`Ficha Técnica:\nTítulo:"${this.titulo}"\nDirector:"${this.director}"\nAño:"${this.estreno}"\nPaís:"${this.pais.join("-")}"\nGéneros:"${this.genero.join(",")}"\nCalificación:"${this.calificacion}"\nIMDB Id:"${this.id}"`)
+        }
+     
      }
 
 
-
      const peli = {
-      id: 'tt123456',
-      titulo:'01234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789',
-      director:'012345678901234567890123456789012345678901234567890123456789',
+      id: 'tt1234564',
+      titulo:'01234567890123456789012345678901234567890123456789012345690123456789012345678901234567890123456789',
+      director:'0123456789012345678901234567890123456789056789',
       estreno: 2024,
-      pais:[]
+      pais:["Peru","Honduras"],
+      generos:["Action"],
+      calificacion: 7.89
     };
 
-      let peliInfo = new Pelicula(peli)
+    const object = new Pelicula(peli)
+    object.fichaTecnica()
+
+
+    const misPelis = [
+      {
+        id:"tt0758758",
+        titulo:"Into the Wild",
+        director:"Sean Penn",
+        estreno:2007,
+        pais:["USA"],
+        generos:["Adventure","Biography","Drama"],
+        calificacion:8.12
+      },
+      {
+        id:"tt0479143",
+        titulo:"Rocky Balboa",
+        director:"Silvester Stallone",
+        estreno:2006,
+        pais:["USA"],
+        generos:["Action","Drama","Sport"],
+        calificacion:7.1
+      },
+      {
+        id:"tt0468569",
+        titulo:"The Darck Knight",
+        director:"Cristopher Nolan",
+        estreno:2008,
+        pais:["USA","UK"],
+        generos:["Action","Crime","Drama"],
+        calificacion:9.0
+      },
+     
+    ]
+
+    misPelis.forEach(objeto =>{new Pelicula(objeto).fichaTecnica()})
+
+     
+
+      
+
 
       
 

@@ -4,7 +4,7 @@ Sin embargo, las declaraciones de variables (let, const, var) no se pueden expor
  directamente como el valor predeterminado de un módulo. Esto se debe a que las declaraciones 
  de variables no son expresiones que puedan ser asignadas directamente como exportación 
  predeterminada.*/ 
-//NOTA: No se puede hacer export default de dos objetos o funciones u otros elementos
+//NOTA: No se puede hacer export default de dos objetos a la misma vez o funciones u otros elementos
 
 export const PI = Math.PI;
 
