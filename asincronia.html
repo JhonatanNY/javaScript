@@ -130,6 +130,7 @@
     /*************************Promesas  *************************/
    
     // En JavaScript, las promesas son objetos que representan el resultado eventual (exitoso o fallido) de una operación asíncrona. 
+    //then: Este método se encadena a una promesa y recibe una función de callback que se ejecutará cuando la promesa se resuelva exitosamente. Dentro de esta función, puedes trabajar con el resultado de la promesa. Puedes encadenar múltiples métodos then para realizar varias operaciones en secuencia. Cada método then recibe el resultado del anterior en la cadena.
 
         const operation = (numero1, numero2, op) => {
             setTimeout(()=>{
@@ -153,6 +154,9 @@
         });
 
         // Usar la promesa
+
+        /*
+
         miPrimeraPromesa.then(function(resultado) {
             console.log(resultado); // Se ejecuta si la promesa se completa con éxito
         }).catch(function(error) {
@@ -167,6 +171,8 @@
             },1000)
         })
         }
+
+        */
 
         // withPromises(2,4).then((resp)=>{console.log(resp)})
 
@@ -223,7 +229,6 @@
                 console.log(`Inicio Async Function`)
                 let obj = await cuadradoPromise(0)
                 console.log(`Async Function: ${obj.value}, ${obj.result}`)
-
                 obj = await cuadradoPromise(1)
                 console.log(`Async Function: ${obj.value}, ${obj.result}`)
                 obj = await cuadradoPromise(2)
@@ -259,7 +264,7 @@
             }
         }
 
-        funcionAsincronaExpresada()
+        
     </script>
 </body>
 </html>
