@@ -48,6 +48,7 @@
 
         
         /*nuevo tipo de dato Symbol*/
+        //En JavaScript, Symbol es un tipo de dato primitivo introducido en ECMAScript 2015 (también conocido como ES6). Un símbolo es un valor único e inmutable que se puede utilizar como identificador de propiedad para los objetos. Los símbolos son útiles cuando deseas crear propiedades de objetos que sean verdaderamente únicas, evitando así colisiones de nombres de propiedades.
 
         const token = Symbol('token');
 
@@ -72,6 +73,58 @@
         }
 
         console.log(Person[Symbol.hasInstance](new Person))
+
+        /***********************Set******************************/
+        /*     
+        En JavaScript, Set es una estructura de datos que te permite almacenar valores únicos de cualquier tipo, ya sean valores primitivos o referencias a objetos. Los elementos en un Set están todos garantizados de ser únicos, lo que significa que no puede haber duplicados dentro de un Set.
+        Aquí hay algunas características importantes de Set:
+        Valores únicos: Como se mencionó anteriormente, los Set solo pueden contener valores únicos. Si intentas agregar un valor que ya existe en el Set, no se añadirá una segunda vez.
+        Iteración en orden de inserción: Los elementos en un Set se iteran en el orden en que fueron insertados.
+        No indexado: A diferencia de los arrays, no puedes acceder a los elementos de un Set mediante un índice.
+        No permite claves duplicadas: En un Set, las claves son los valores mismos, no puedes especificar una clave personalizada.
+        Métodos para añadir, eliminar y comprobar la existencia de elementos: Los Set proporcionan métodos para añadir (add()), eliminar (delete()), y comprobar la existencia (has()) de elementos en la colección.
+        */
+       // size - Se usa para ver el tamaño de un Set a diferencia del arreglo que se usa length
+
+        const set = new Set([1,2,3,3,4,5,true,false,false,{},{},"hola","Hola"])
+        console.log(set)
+        console.log(set.size)
+
+        const set2 = new Set()
+        set2.add(1)
+        set2.add(2)
+        set2.add(2)
+        set2.add(4)
+        set2.add(4)
+        set2.add(true)
+        set2.add(true)
+        set2.add({})
+
+        console.log(set)
+        console.log("Recorriendo set con for of")
+
+        for (let iterator of set) {
+            console.log(iterator)
+        }
+
+        console.log("Recorriendo set2 con forEach")
+
+        set2.forEach(item => console.log(item))
+
+        console.log("Convirtiendo a array con Array.from() un Set")
+        let arr = Array.from(set) 
+        console.log(arr)
+        console.log(arr[4])
+        console.log("Probando el metodo delete de Set")
+        set2.delete(4)
+        console.log(set2)
+        console.log("Validando con el metodo has si se encuentra en el set")
+        let validando = set2.has(2)
+        console.log(validando)
+        console.log("Usando el metodo clear que limpia el set")
+        set2.clear()
+        console.log(set2)
+
     </script>
 </body>
 </html>
