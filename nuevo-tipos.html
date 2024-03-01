@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Nuevos Tipos de Datos en JavaScript</h1>
+
+    <script>
+        /***********************Symbols******************************/
+        //los corchetes [ ] en JavaScript se utilizan para definir propiedades de objetos de manera dinámica 
+
+        let id = Symbol("id")
+        let id2 = Symbol("id2")
+
+        console.log(id === id2)
+        console.log(id,id2)
+        console.log(typeof id, typeof id2)
+
+        const NOMBRE = Symbol("nombre")
+        const SALUDAR = Symbol("saludar")
+
+        const persona = {
+            [NOMBRE]:"jhonatan",
+            APELLIDO: "yataco"
+        }
+
+        persona.SEGUNDONOMBRE = "Armando"
+        console.log(persona)
+        console.log(persona.SEGUNDONOMBRE)
+        console.log(persona[NOMBRE])
+        console.log(persona['APELLIDO'])
+
+        persona[SALUDAR] = function(){
+            console.log("hola")
+        }
+
+        console.log(persona)
+
+        persona[SALUDAR]()
+
+        for (let iterator in persona) {
+            console.log(iterator)
+         
+        }
+
+        
+        /*nuevo tipo de dato Symbol*/
+
+        const token = Symbol('token');
+
+        const obj = {
+            [token]: 46
+        };
+
+
+        obj[Symbol('token')] = 4
+
+        console.log(obj)
+
+        console.log(Symbol.hasInstance)
+        console.log(Symbol.iterator)
+
+        class Person {
+        
+            saludo(){
+                let respuesta = "hola"
+                return respuesta
+            }
+        }
+
+        console.log(Person[Symbol.hasInstance](new Person))
+    </script>
+</body>
+</html>
