@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
+
 <body>
     <h1>Nuevos Tipos de Datos en JavaScript</h1>
 
@@ -16,14 +18,14 @@
         let id2 = Symbol("id2")
 
         console.log(id === id2)
-        console.log(id,id2)
+        console.log(id, id2)
         console.log(typeof id, typeof id2)
 
         const NOMBRE = Symbol("nombre")
         const SALUDAR = Symbol("saludar")
 
         const persona = {
-            [NOMBRE]:"jhonatan",
+            [NOMBRE]: "jhonatan",
             APELLIDO: "yataco"
         }
 
@@ -33,7 +35,7 @@
         console.log(persona[NOMBRE])
         console.log(persona['APELLIDO'])
 
-        persona[SALUDAR] = function(){
+        persona[SALUDAR] = function () {
             console.log("hola")
         }
 
@@ -43,12 +45,14 @@
 
         for (let iterator in persona) {
             console.log(iterator)
-         
+
         }
 
-        
+
         /*nuevo tipo de dato Symbol*/
-        //En JavaScript, Symbol es un tipo de dato primitivo introducido en ECMAScript 2015 (también conocido como ES6). Un símbolo es un valor único e inmutable que se puede utilizar como identificador de propiedad para los objetos. Los símbolos son útiles cuando deseas crear propiedades de objetos que sean verdaderamente únicas, evitando así colisiones de nombres de propiedades.
+        //En JavaScript, Symbol es un tipo de dato primitivo introducido en ECMAScript 2015 (también conocido como ES6). 
+        //Un símbolo es un valor único e inmutable que se puede utilizar como identificador de propiedad para los objetos. 
+        //Los símbolos son útiles cuando deseas crear propiedades de objetos que sean verdaderamente únicas, evitando así colisiones de nombres de propiedades.
 
         const token = Symbol('token');
 
@@ -65,8 +69,8 @@
         console.log(Symbol.iterator)
 
         class Person {
-        
-            saludo(){
+
+            saludo() {
                 let respuesta = "hola"
                 return respuesta
             }
@@ -84,9 +88,9 @@
         No permite claves duplicadas: En un Set, las claves son los valores mismos, no puedes especificar una clave personalizada.
         Métodos para añadir, eliminar y comprobar la existencia de elementos: Los Set proporcionan métodos para añadir (add()), eliminar (delete()), y comprobar la existencia (has()) de elementos en la colección.
         */
-       // size - Se usa para ver el tamaño de un Set a diferencia del arreglo que se usa length
+        // size - Se usa para ver el tamaño de un Set a diferencia del arreglo que se usa length
 
-        const set = new Set([1,2,3,3,4,5,true,false,false,{},{},"hola","Hola"])
+        const set = new Set([1, 2, 3, 3, 4, 5, true, false, false, {}, {}, "hola", "Hola"])
         console.log(set)
         console.log(set.size)
 
@@ -112,7 +116,7 @@
         set2.forEach(item => console.log(item))
 
         console.log("Convirtiendo a array con Array.from() un Set")
-        let arr = Array.from(set) 
+        let arr = Array.from(set)
         console.log(arr)
         console.log(arr[4])
         console.log("Probando el metodo delete de Set")
@@ -137,9 +141,9 @@
         */
 
         let mapa = new Map()
-        mapa.set("nombre","jhonatan")
-        mapa.set(1,"jhonatan")
-        mapa.set(false,"SMP")
+        mapa.set("nombre", "jhonatan")
+        mapa.set(1, "jhonatan")
+        mapa.set(false, "SMP")
 
         console.log("Imprimiendo el mapa")
         console.log(mapa)
@@ -148,25 +152,72 @@
         console.log("El metodo para saber si existe la llave en Map es 'has' al igual que en Set")
         console.log(mapa.has('nombre'))
         console.log("Reescribiendo el valor de la clave 'nombre'")
-        mapa.set("nombre","armando")
+        mapa.set("nombre", "armando")
         console.log(mapa.get("nombre"))
         console.log("Recorriendo el mapa con for of")
         for (const [clave,valor] of mapa) {
-            console.log(`Llave:${clave}, Valor:${valor}`)
+         
+            console.log(`Llave: ${clave}, Valor: ${valor}`);
         }
 
         const mapa2 = new Map([
-            ["nombre","jhonatan"],
-            ["edad",7],
-            ["distrito","SMP"],
+            ["nombre", "jhonatan"],
+            ["edad", 7],
+            ["distrito", "SMP"],
         ])
         console.log(mapa2)
 
-        const llavesMapa2 = mapa2.keys()
-        const valoreMapa2 = mapa2.values()
+        const llavesMapa2 = [...mapa2.keys()]
+        const valoreMapa2 = [...mapa2.values()]
 
         console.log(llavesMapa2)
         console.log(valoreMapa2)
+
+        //NOTA: Cuando se menciona que el constructor de Map espera un iterable, se refiere a que el argumento 
+        //que se pasa al constructor debe ser una estructura de datos iterable, 
+        //es decir, que se pueda recorrer secuencialmente.
+        /*Un iterable es cualquier objeto que implemente el protocolo de iteración en JavaScript. Esto incluye arrays, cadenas de texto, objetos tipo Array (por ejemplo, NodeList, HTMLCollection), así como también objetos iterables definidos por el usuario (mediante el uso de métodos Symbol.iterator).*/
+        
+        /*keys(): Este es un método de los objetos Map que devuelve un objeto iterador que contiene las claves del mapa mapa2*/
+        /*values(): Similar al método keys(), values() devuelve un nuevo objeto Iterator que contiene los valores del Map en el mismo orden que fueron insertados. También se utiliza el operador de propagación (...) para convertir este iterador en una matriz.*/
+
+        /*************************************WeakSets & WeakMaps***************************************/
+        console.log("WeakSets & WeakMaps")
+        console.log("WeakSets")
+        const ws = new WeakSet()
+
+        let valor1 = {"valor":1}
+        let valor2 = {"valor":2}
+        let valor3 = {"valor":3}
+
+        ws.add(valor1)
+        ws.add(valor2)
+        console.log("imprimiendo el WeakSet")
+        console.log(ws)
+        console.log("Usando el metodo 'has' de WeakSet")
+        console.log(ws.has(valor1))
+        console.log(ws.has(valor2))
+        console.log(ws.has(valor3))
+        console.log("Usando el metodo 'delete' de WeakSet")
+        console.log(ws.delete(valor2))
+        console.log(ws)
+        ws.add(valor2)
+        console.log(ws)
+
+        console.log("WeakMaps")
+
+        const wm = new WeakMap()
+        let llave1 = {}
+        let llave2 = {}
+        let llave3 = {}
+
+        wm.set(llave1,1)
+        wm.set(llave2,2)
+        console.log("imprimiendo el Weakmap")
+        console.log(wm)
+
+
     </script>
 </body>
+
 </html>
